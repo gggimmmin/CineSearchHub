@@ -38,3 +38,85 @@ function displayMovies(movies) {
         movieListContainer.appendChild(movieItem);
     });
 }
+
+
+// 영화 카드 구조 
+function displayMovies(movies) {
+    const movieListContainer = document.getElementById('movieList');
+
+    movieListContainer.innerHTML = '';
+
+    movies.forEach(movie => {
+        // 카드 구조 생성
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('col-md-4', 'mb-3');
+
+        const cardBodyDiv = document.createElement('div');
+        cardBodyDiv.classList.add('card', 'h-100');
+
+        const imgElement = document.createElement('img');
+        imgElement.classList.add('card-img-top');
+        imgElement.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+        imgElement.alt = movie.title;
+
+        const cardBodyContentDiv = document.createElement('div');
+        cardBodyContentDiv.classList.add('card-body');
+
+        const cardTitleElement = document.createElement('h5');
+        cardTitleElement.classList.add('card-title');
+        cardTitleElement.textContent = movie.title;
+
+        const movieOverview = document.createElement('p');
+        movieOverview.classList.add('card-text');
+        movieOverview.textContent = movie.overview;
+
+        const movieVoteAverage = document.createElement('p');
+        movieVoteAverage.classList.add('card-text');
+        movieVoteAverage.textContent = `Vote Average: ${movie.vote_average}`;
+
+        // 구조에 요소 추가
+        cardBodyContentDiv.appendChild(cardTitleElement);
+        cardBodyContentDiv.appendChild(movieOverview);
+        cardBodyContentDiv.appendChild(movieVoteAverage);
+
+        cardBodyDiv.appendChild(imgElement);
+        cardBodyDiv.appendChild(cardBodyContentDiv);
+
+        cardDiv.appendChild(cardBodyDiv);
+
+        // 카드를 컨테이너에 추가
+        movieListContainer.appendChild(cardDiv);
+
+        // 클릭 이벤트 리스너 추가
+        cardDiv.addEventListener('click', function() {
+            // 클릭한 영화의 ID를 얻어온 후 alert 창에 표시
+            alert(`Clicked Movie ID: ${movie.id}`);
+        });
+    });
+}
+
+// 함수 호출 전에 비어 있는 배열을 전달하여 초기 상태로 설정
+displayMovies([]);
+
+// 테스트용 데이터
+const moviesData = [
+    {
+        title: 'Movie 1',
+        overview: 'Overview for Movie 1',
+        poster_path: '/path-to-poster-1.jpg',
+        vote_average: 7.5
+    },
+    {
+        title: 'Movie 2',
+        overview: 'Overview for Movie 2',
+        poster_path: '/path-to-poster-2.jpg',
+        vote_average: 8.2
+    },
+    // Add more movies as needed
+];
+
+// 함수 호출
+displayMovies(moviesData);
+
+
+
