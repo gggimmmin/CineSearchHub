@@ -12,33 +12,45 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error fetching data:', error));
 });
 
-// 영화 목록을 받아와서 HTML에 표시하는 함수
-function displayMovies(movies) {
-    const movieListContainer = document.getElementById('movieList');
+// // 영화 목록을 받아와서 HTML에 표시하는 함수
+// function displayMovies(movies) {
+//     const movieListContainer = document.getElementById('movieList');
 
-    movies.forEach(movie => {
-        const movieTitle = document.createElement('h2');
-        movieTitle.textContent = movie.title;
+//     movies.forEach(movie => {
+//         const movieTitle = document.createElement('h2');
+//         movieTitle.textContent = movie.title;
 
-        const movieOverview = document.createElement('p');
-        movieOverview.textContent = movie.overview;
+//         const movieOverview = document.createElement('p');
+//         movieOverview.textContent = movie.overview;
 
-        const moviePoster = document.createElement('img');
-        moviePoster.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-        moviePoster.alt = movie.title;
+//         const moviePoster = document.createElement('img');
+//         moviePoster.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+//         moviePoster.alt = movie.title;
 
-        const movieVoteAverage = document.createElement('p');
-        movieVoteAverage.textContent = `Vote Average: ${movie.vote_average}`;
+//         const movieVoteAverage = document.createElement('p');
+//         movieVoteAverage.textContent = `Vote Average: ${movie.vote_average}`;
 
-        const movieItem = document.createElement('div');
-        movieItem.appendChild(movieTitle);
-        movieItem.appendChild(movieOverview);
-        movieItem.appendChild(moviePoster);
-        movieItem.appendChild(movieVoteAverage);
-        movieListContainer.appendChild(movieItem);
-    });
+//         const movieItem = document.createElement('div');
+//         movieItem.appendChild(movieTitle);
+//         movieItem.appendChild(movieOverview);
+//         movieItem.appendChild(moviePoster);
+//         movieItem.appendChild(movieVoteAverage);
+//         movieListContainer.appendChild(movieItem);
+//     });
+// }
+
+// 검색 기능을 위한 데이터 초기화 함수
+function initializeMoviesData(data) {
+    moviesData = data.map(movie => ({
+        title: movie.title,
+        overview: movie.overview,
+        poster_path: movie.poster_path,
+        vote_average: movie.vote_average,
+        id: movie.id
+    }));
 }
 
+// 영화 목록을 받아와서 HTML에 표시하는 함수
 // 영화 카드 구조 
 function displayMovies(movies) {
     const movieListContainer = document.getElementById('movieList');
@@ -66,7 +78,7 @@ function displayMovies(movies) {
         cardTitleElement.textContent = movie.title;
 
         const movieOverview = document.createElement('p');
-        movieOverview.classList.add('card-text');
+        movieOverview.classList.add('card-text', 'overview-hidden');
         movieOverview.textContent = movie.overview;
 
         const movieVoteAverage = document.createElement('p');
@@ -79,6 +91,7 @@ function displayMovies(movies) {
             movieVoteAverage.style.color = 'green';
         }
 
+        
 
         // 구조에 요소 추가
         cardBodyContentDiv.appendChild(cardTitleElement);
@@ -164,6 +177,6 @@ function handleEnterKey(event) {
     }
 }
 
-// Enter 키 이벤트를 감지하는 리스너 등록
+//Enter 키 이벤트를 감지하는 리스너 등록
 document.getElementById('searchInput').addEventListener('keydown', handleEnterKey);
-document.getElementById('searchButton').addEventListener('click', executeSearch);
+document.getElementById('searchButton').addEventListener('click', searchMovies);

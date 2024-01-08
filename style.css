@@ -3,7 +3,7 @@
 }
 
 .col-md-4.mb-3 {
-/* 기본 스타일 */
+    /* 기본 스타일 */
     padding: 20px;
     border: 1px solid #ccc opacity 0;
     transition: box-shadow 0.3s, background-color 0.3s;
@@ -17,7 +17,7 @@
 /* 텍스트 요소에 대한 스타일 제거 */
 /* 예시로 텍스트 요소들의 margin을 0으로 설정 */
 .col-md-4.mb-3 p {
-    margin: 0; 
+    margin: 0;
 }
 
 
@@ -41,3 +41,10 @@ body {
     text-align: center;
 }
 
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 500,
+        'GRAD' 0,
+        'opsz' 24
+}
