@@ -156,3 +156,14 @@ const moviesData = [
 
 // 함수 호출
 displayMovies(moviesData);
+
+// Enter 키를 눌렀을 때 실행되는 함수
+function handleEnterKey(event) {
+    if (event.key === 'Enter') {
+        searchMovies();
+    }
+}
+
+// Enter 키 이벤트를 감지하는 리스너 등록
+document.getElementById('searchInput').addEventListener('keydown', handleEnterKey);
+document.getElementById('searchButton').addEventListener('click', executeSearch);
