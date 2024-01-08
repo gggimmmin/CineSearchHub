@@ -71,7 +71,14 @@ function displayMovies(movies) {
 
         const movieVoteAverage = document.createElement('p');
         movieVoteAverage.classList.add('card-text');
-        movieVoteAverage.textContent = `Vote Average: ${movie.vote_average}`;
+        // 반올림된 소수점 한 자리까지 표시
+        const roundedVoteAverage = parseFloat(movie.vote_average).toFixed(1);
+        movieVoteAverage.textContent = `Vote Average: ${roundedVoteAverage}`;
+        // 숫자가 8보다 크면 텍스트 색상을 초록색으로 변경
+        if (parseFloat(movie.vote_average) > 8) {
+            movieVoteAverage.style.color = 'green';
+        }
+
 
         // 구조에 요소 추가
         cardBodyContentDiv.appendChild(cardTitleElement);
