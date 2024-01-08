@@ -39,7 +39,6 @@ function displayMovies(movies) {
     });
 }
 
-
 // 영화 카드 구조 
 function displayMovies(movies) {
     const movieListContainer = document.getElementById('movieList');
@@ -88,12 +87,45 @@ function displayMovies(movies) {
         movieListContainer.appendChild(cardDiv);
 
         // 클릭 이벤트 리스너 추가
-        cardDiv.addEventListener('click', function() {
+        cardDiv.addEventListener('click', function () {
             // 클릭한 영화의 ID를 얻어온 후 alert 창에 표시
             alert(`Clicked Movie ID: ${movie.id}`);
         });
     });
 }
+
+
+// 검색 기능을 위한 함수
+function searchMovies() {
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput.value.trim().toLowerCase();  // 검색어 공백 제거 및 소문자로 변환
+
+    // 검색어가 비어 있는 경우
+    if (searchTerm === '') {
+        alert('영화 제목을 입력해주세요.');
+        return;  // 검색어가 비어 있으면 더 이상 진행하지 않고 함수를 종료
+    }
+
+    // 검색어와 일치하는 영화만 필터링
+    const filteredMovies = moviesData.filter(movie =>
+        movie.title.toLowerCase().includes(searchTerm)
+    );
+
+    // 영화 목록 컨테이너를 비우고, 검색 결과만 표시
+    const movieListContainer = document.getElementById('movieList');
+    movieListContainer.innerHTML = '';
+
+    if (filteredMovies.length > 0) {
+        // 필터링된 영화 목록을 표시
+        displayMovies(filteredMovies);
+    } else {
+        // 검색 결과가 없는 경우에 메시지를 표시
+        const noResultsMessage = document.createElement('p');
+        noResultsMessage.textContent = '검색 결과가 없습니다.';
+        movieListContainer.appendChild(noResultsMessage);
+    }
+}
+
 
 // 함수 호출 전에 비어 있는 배열을 전달하여 초기 상태로 설정
 displayMovies([]);
@@ -117,6 +149,3 @@ const moviesData = [
 
 // 함수 호출
 displayMovies(moviesData);
-
-
-

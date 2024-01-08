@@ -10,8 +10,11 @@
 </head>
 <body>
     <h1>Top Rated Movies</h1>
-    <!-- <div id="movieList"></div> -->
     <div class="container">
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="영화 제목 검색">
+            <button onclick="searchMovies()" class="btn btn-primary mt-2">검색</button>
+        </div>
         <div id="movieList" class="row"></div>
     </div>
 
